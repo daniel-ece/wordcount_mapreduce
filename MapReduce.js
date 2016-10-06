@@ -54,6 +54,7 @@ window.onload = function() {
                   for (var k in arrayMap) {
                     mapDisplayArea.innerText = mapDisplayArea.innerText + "(" + k + "," + arrayMap[k] +")\n"; //(word, 1)
                   }
+
                   mapDisplayArea.innerText =  mapDisplayArea.innerText + "\n";
                 }
 
@@ -62,16 +63,19 @@ window.onload = function() {
 
                 //display the result of the shuffle and sort function
                 for (var k in arraySorted) {
-                  shufflesortDisplayArea.innerText = shufflesortDisplayArea.innerText + "(" + k + "," + arraySorted[k] +")\n";
+                  shufflesortDisplayArea.innerText = shufflesortDisplayArea.innerText + "(" + k + ", [" + arraySorted[k] +"])\n";
                 }
 
+                //call Reduce function and display the result
+                for(var k in arraySorted) {
 
+                  //call the reduce function
+                  var reducer = reduce(k, arraySorted[k]);
 
-
-
-
+                  //display result of the reducers
+                  reduceDisplayArea.innerText = reduceDisplayArea.innerText + "(" + k + "," + reducer[k] +")\n";
+                }
               }
-
           } else {
               fileDisplayArea.innerText = "File not supported!"
           }
@@ -100,8 +104,7 @@ function map(line) {
 }
 
 //Function sortArray by key
-function sortArray(arrayToSort)
-{
+function sortArray(arrayToSort) {
   var keys = [];
 
   for (var k in arrayToSort) {
@@ -123,6 +126,14 @@ function sortArray(arrayToSort)
 }
 
 //Function reduce
-function reduce() {
+function reduce(key, value) {
+  console.log(value);
+  var reducer = {} //array
 
+  if(value.length>1) {
+    reducer[key] = value.length; //(word,value) it is a word count so the new value will be the length of the array value
+  } else {
+    reducer[key] = 1;
+  }
+  return reducer; // return the result
 }
