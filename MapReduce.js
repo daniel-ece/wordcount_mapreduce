@@ -127,13 +127,16 @@ function sortArray(arrayToSort) {
 
 //Function reduce
 function reduce(key, value) {
-  console.log(value);
   var reducer = {} //array
 
   if(value.length>1) {
-    reducer[key] = value.length; //(word,value) it is a word count so the new value will be the length of the array value
+    var newValue = 0;
+    for(var i in value) {
+      newValue += 1;
+    }
+    reducer[key] = newValue; //(word,value) it is a word count so the new value will be the length of the array value
   } else {
-    reducer[key] = 1;
+    reducer[key] = value;
   }
   return reducer; // return the result
 }
